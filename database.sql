@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-10-2024 a las 12:34:30
+-- Tiempo de generación: 21-10-2024 a las 14:27:03
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -36,6 +36,14 @@ CREATE TABLE `pista` (
   `max_jugadores` int(11) NOT NULL DEFAULT 2,
   `disponible` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `pista`
+--
+
+INSERT INTO `pista` (`id`, `nombre`, `tipo`, `max_jugadores`, `disponible`) VALUES
+(1, 'Pabellon', 'Volley', 12, 1),
+(10, 'Piscina', 'Nataci', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -98,19 +106,19 @@ ALTER TABLE `socio`
 -- AUTO_INCREMENT de la tabla `pista`
 --
 ALTER TABLE `pista`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `socio`
 --
 ALTER TABLE `socio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas

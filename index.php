@@ -28,8 +28,12 @@ switch($endpoint) {
         $controller->processRequest($method, $id);
         break;
     case "reservas":
+        $controller = new ReservasController($database);
+        $controller->processRequest($method, $id);
         break;
     case "socios":
+        $controller = new SociosController($database);
+        $controller->processRequest($method, $id);
         break;
     default:
         http_response_code(404);

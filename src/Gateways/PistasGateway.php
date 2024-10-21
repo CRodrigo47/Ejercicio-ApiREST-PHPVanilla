@@ -38,9 +38,9 @@ class PistasGateway{
         $stmt = $this->con->prepare($sql);
 
         $stmt->bindValue(":nombre", $data["nombre"], PDO::PARAM_STR);
-        $stmt->bindValue(":tipo", $data["tipo"] ?? 0, PDO::PARAM_STR);
-        $stmt->bindValue(":max_jugadores", $data["max_jugadores"] ?? 0, PDO::PARAM_INT);
-        $stmt->bindValue(":disponible", (bool)$data["disponible"] ?? false, PDO::PARAM_BOOL);
+        $stmt->bindValue(":tipo", $data["tipo"], PDO::PARAM_STR);
+        $stmt->bindValue(":max_jugadores", $data["max_jugadores"] ?? 2, PDO::PARAM_INT);
+        $stmt->bindValue(":disponible", (bool)($data["disponible"] ?? false), PDO::PARAM_BOOL);
 
         $stmt->execute();
         return $this->con->lastInsertId();
