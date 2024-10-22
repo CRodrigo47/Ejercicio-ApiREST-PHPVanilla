@@ -52,7 +52,7 @@ class SociosController {
                     );
                 break;
             case "DELETE":
-                $errors = $this->getDeleteErrors($socio, false);
+                $errors = $this->getValidationErrors($socio, false);
                 if(!empty($errors)){
                     http_response_code(422);
                     echo json_encode(["errors"=>$errors]);
@@ -145,18 +145,14 @@ class SociosController {
                     $errors[] = "La socio debe estar penalizado (true) o no (false)";
                 }
             }
+            $reservaExistente = array_filter($this->reservaGateway->getAll(), fn($reserva) => $reserva["socio"]===$data["id"]);
+
+            if($reservaExistente){
+                $errors[] = "No se puede eliminar un socio si existen reservas a su nombre. Elimina las reservas primero.";
+            }
         }
 
         return $errors;
     }
 
-    private function getDeleteErrors(array $data){
-        $errors=[];
-        $reservaExistente = array_filter($this->reservaGateway->getAll(), fn($reserva) => $reserva["socio"]===$data["id"]);
-
-        if($reservaExistente){
-            $errors[] = "No se puede eliminar un socio si existen reservas a su nombre. Elimina las reservas primero.";
-        }
-        return $errors;
-    }
 }

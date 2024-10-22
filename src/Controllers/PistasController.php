@@ -52,7 +52,7 @@ class PistasController {
                     );
                 break;
             case "DELETE":
-                $errors = $this->getDeleteErrors($pista, false);
+                $errors = $this->getValidationErrors($pista, false);
                 if(!empty($errors)){
                     http_response_code(422);
                     echo json_encode(["errors"=>$errors]);
@@ -146,18 +146,13 @@ class PistasController {
                     $errors[] = "La pista debe estar disponible (true) o no (false)";
                 }
             }
-        }
-
-        return $errors;
-    }
-
-    private function getDeleteErrors(array $data){
-        $errors=[];
-        $reservaExistente = array_filter($this->reservaGateway->getAll(), fn($reserva) => $reserva["pista"]===$data["id"]);
+            $reservaExistente = array_filter($this->reservaGateway->getAll(), fn($reserva) => $reserva["pista"]===$data["id"]);
 
         if($reservaExistente){
             $errors[] = "No se puede eliminar una pista si existen reservas a su nombre. Elimina las reservas primero.";
         }
+        }
+
         return $errors;
     }
 }
